@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect, useRef } from 'react';
+import './App.css';
+import phrases from './utils/phrases.json';
+import bgArr from './utils/bgArr.json';
+import getRandomFromArr from './services/getRandomFromArr';
+import Phrase from './components/Phrase';
+import ButtonPhrase from './components/ButtonPhrase';
+import gsap from 'gsap';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const quote = getRandomFromArr(phrases);
+  const [phraseRandom, setPhraseRandom] = useState(quote);
+  const [bgApp, setBgApp] = useState(getRandomFromArr(bgArr));
+
+
+
+  // Ref for the cookie animation
+  const cookieRef = useRef(null);
+
+  // GSAP Animation on mount
+  useEffect(() => {
+    if (cookieRef.current) {
+      gsap.fromTo(
+        cookieRef.current,
+        { scale: 0.5, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, ease: 'elastic.out(1, 0.5)' },
+      );
+    }
+  }, [bgApp]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="app">
+			<h1>Galleta de la fortuna</h1>
+			<article ref={cookieRef}>
+				<Phrase phraseRandom={phraseRandom} />
+				<ButtonPhrase setPhraseRandom={setPhraseRandom} setBgApp={setBgApp} />
+			</article>
+		</div> 
     </>
-  )
+  );
 }
 
 export default App
