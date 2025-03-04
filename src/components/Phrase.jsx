@@ -1,9 +1,12 @@
 
 const Phrase = ({ phraseRandom }) => {
-
+  const { phrase, author } = phraseRandom;
 
   return (
-        <p className="app__phrase">{phraseRandom.phrase}</p>
+    <div className="galleta_text">
+      <q>{phrase}</q>
+      <p>-<strong>{author}</strong></p>
+    </div>
   )
 }
 
