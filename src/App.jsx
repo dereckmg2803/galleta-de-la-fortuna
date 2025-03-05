@@ -7,7 +7,7 @@ import Phrase from './components/Phrase';
 import ButtonPhrase from './components/ButtonPhrase';
 import gsap from 'gsap';
 import { img1, img2, img3, img4, cookiesound, cookieleft, cookieright } from './assets';
-import Title from './components/title';
+import Title from './components/Title';
 
 const images = [img1, img2, img3, img4];
 
