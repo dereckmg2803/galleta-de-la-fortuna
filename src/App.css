@@ -23,21 +23,22 @@
   bottom: 60px;
 }
 .cookieleft {
+  display: flex;
   position: absolute;  /* Se coloca encima de todo */
-  top: 38%;
+  top: 34%;
   left: 40%; 
   z-index: 1000; 
-  width: 140px; 
+  width: 110px; 
   height: auto;
   pointer-events: none; /* Evita que interfiera con clics */
 }
 
 .cookieright {
   position: absolute;  /* Se coloca encima de todo */
-  top: 37%;
-  left: 45%; 
+  top: 33%;
+  left: 35%; 
   z-index: 1000; 
-  width: 156px; 
+  width: 126px; 
   height: auto;
   pointer-events: none; /* Evita que interfiera con clics */
 }
@@ -132,6 +133,17 @@
   flex: 1 1 100px
 }
 @media (width >=425px) {
+  .cookieleft {
+    top: 34%;
+    left: 40%; 
+    width: 115px;
+  }
+  
+  .cookieright {
+    top: 32%;
+    left: 35%; 
+    width: 129px;
+  }
   .galleta_text {
    
     position: relative;
@@ -155,6 +167,17 @@
   }
 }
 @media (width >=768px) {
+  .cookieleft {
+    top: 36%;
+    left: 40%; 
+    width: 145px;
+  }
+  
+  .cookieright {
+    top: 32%;
+    left: 50%; 
+    width: 159px;
+  }
   .galleta_text {
    
     position: inherit;
