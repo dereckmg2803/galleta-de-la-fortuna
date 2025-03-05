@@ -25,7 +25,7 @@
 .cookieleft {
   display: flex;
   position: absolute;  /* Se coloca encima de todo */
-  top: 34%;
+  top: 42%;
   left: 40%; 
   z-index: 1000; 
   width: 110px; 
@@ -35,7 +35,7 @@
 
 .cookieright {
   position: absolute;  /* Se coloca encima de todo */
-  top: 33%;
+  top: 40%;
   left: 35%; 
   z-index: 1000; 
   width: 126px; 
@@ -67,6 +67,7 @@
   font-family: 'Pacifico', cursive;
   font-weight: bold;
   bottom: 40px;
+  width: 95%;
   text-align: center;
   position: relative;
   color: #fbfbfb;
@@ -83,7 +84,7 @@
 
 .galleta_text {
   position: relative;
-  bottom: 40px;
+  bottom: 26px;
   font-size: 13px;
   display: flex;
   width: 90%;
