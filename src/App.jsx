@@ -6,7 +6,8 @@ import getRandomFromArr from './services/getRandomFromArr';
 import Phrase from './components/Phrase';
 import ButtonPhrase from './components/ButtonPhrase';
 import gsap from 'gsap';
-import { img1, img2, img3, img4 } from './assets';
+import { img1, img2, img3, img4, cookiesound, cookieleft, cookieright } from './assets';
+import Title from './components/title';
 
 const images = [img1, img2, img3, img4];
 
@@ -16,16 +17,42 @@ function App() {
   const [bgApp, setBgApp] = useState(getRandomFromArr(bgArr));
   const [image, setImage] = useState(getRandomFromArr(images));
 
-  // Ref para la animación de la galleta
-  const cookieRef = useRef(null);
+  // Refs para las animaciones
+  const textRef = useRef(null);
+  const cookieLeftRef = useRef(null);
+  const cookieRightRef = useRef(null);
+  const audioRef = useRef(new Audio(cookiesound));
 
-  // Animación con GSAP
-  useEffect(() => {
-    if (cookieRef.current) {
+  // Función para animar las cookies
+  const animateCookies = () => {
+    if (cookieLeftRef.current) {
       gsap.fromTo(
-        cookieRef.current,
+        cookieLeftRef.current,
+        { opacity: 1, x: 0, y: 0 },
+        { opacity: 0, x: -150, duration: 1.5, ease: 'power2.out' }
+      );
+    }
+    if (cookieRightRef.current) {
+      gsap.fromTo(
+        cookieRightRef.current,
+        { opacity: 1, x: 0, y: 0 },
+        { opacity: 0, x: 150, duration: 1.5, ease: 'power2.out' }
+      );
+    }
+  };
+
+  useEffect(() => {
+    animateCookies();
+  }, []);
+  
+
+  // Animación con GSAP para el texto
+  useEffect(() => {
+    if (textRef.current) {
+      gsap.fromTo(
+        textRef.current,
         { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1, ease: 'elastic.out(1, 0.5)' },
+        { scale: 1, opacity: 1, duration: 1, ease: 'elastic.out(1, 0.5)' }
       );
     }
   }, [bgApp]);
@@ -36,30 +63,33 @@ function App() {
     document.body.style.backgroundSize = 'cover';
     document.body.style.backgroundPosition = 'center';
     document.body.style.transition = 'background 0.5s ease-in-out';
-  }, [image]); // Se ejecuta cada vez que `image` cambia
+  }, [image]);
 
   const handleChangePhrase = () => {
-    setPhraseRandom(getRandomFromArr(phrases));
-    setBgApp(getRandomFromArr(bgArr));
-    setImage(getRandomFromArr(images));
-  };
+    audioRef.current.currentTime = 0;
+    audioRef.current.play();
 
+    setPhraseRandom(prev => getRandomFromArr(phrases, prev));
+    setBgApp(prev => getRandomFromArr(bgArr, prev));
+    setImage(prev => getRandomFromArr(images, prev));
+
+    // Llamar la animación de las cookies
+    animateCookies();
+  };
 
   return (
     <>
-      <div className='galleta_title'>
-        <h1>Galleta de la fortuna</h1>
+      <Title />
+      <div ref={cookieLeftRef} className="cookieleft">
+        <img src={cookieleft} alt="cookie left animation" />
       </div>
-      <div className="galleta_container" ref={cookieRef}>
-        <article className='article'>
-          <Phrase phraseRandom={phraseRandom} />
-        </article>
+      <div ref={cookieRightRef} className="cookieright">
+        <img src={cookieright} alt="cookie right animation" />
       </div>
-      <div className='button'>
-        <ButtonPhrase
-          handlePhrase={handleChangePhrase}
-        />
+      <div className="galleta_container" ref={textRef}>
+        <Phrase phraseRandom={phraseRandom} />
       </div>
+      <ButtonPhrase handlePhrase={handleChangePhrase} />
     </>
   );
 }

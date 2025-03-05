@@ -2,10 +2,12 @@ const ButtonPhrase = ({ handlePhrase }) => {
 
 
 	return (
-		<button className="app__btn" onClick={handlePhrase}>
-			Ver otro
+		<div className='button'>
+        <button className="app__btn" onClick={handlePhrase}>
+			Ver otra frase
 		</button>
-	);
+      </div>
+	)
 };
 
 export default ButtonPhrase;

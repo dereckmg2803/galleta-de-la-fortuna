@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import "tailwindcss";
+
 
 
 #root {
@@ -15,6 +17,31 @@
   justify-content: center;
   align-items: center;
 }
+
+.button{
+  position:relative;
+  bottom: 60px;
+}
+.cookieleft {
+  position: absolute;  /* Se coloca encima de todo */
+  top: 38%;
+  left: 40%; 
+  z-index: 1000; 
+  width: 140px; 
+  height: auto;
+  pointer-events: none; /* Evita que interfiera con clics */
+}
+
+.cookieright {
+  position: absolute;  /* Se coloca encima de todo */
+  top: 37%;
+  left: 45%; 
+  z-index: 1000; 
+  width: 156px; 
+  height: auto;
+  pointer-events: none; /* Evita que interfiera con clics */
+}
+
 
 .galleta_container {
   background-image: url('/public/rectangle1.svg');
@@ -35,21 +62,28 @@
 }
 
 .galleta_title {
-  font-size: 10px;
+  font-size: 14px;
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+  bottom: 40px;
+  text-align: center;
   position: relative;
-  bottom: 100px;
-  transition: color 0.3s;
+  color: #fbfbfb;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+  transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
 
   &:hover {
-    color: red;
+    color: #9c9c9c;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+    transform: scale(1.1);
   }
-
 }
+
 
 .galleta_text {
   position: relative;
-  bottom: 50px;
-  font-size: 10px;
+  bottom: 40px;
+  font-size: 13px;
   display: flex;
   width: 90%;
   flex-direction: column;
@@ -113,6 +147,11 @@
     &:hover {
       color: yellow;
     }
+  }
+
+  .button{
+    position:relative;
+    bottom: 0px;
   }
 }
 @media (width >=768px) {
